@@ -1,0 +1,65 @@
+import { ScrollView, Text, View, Pressable } from "react-native";
+import { useRouter } from "expo-router";
+import { ScreenContainer } from "@/components/screen-container";
+import knowledgeData from "@/data/knowledge.json";
+
+export default function HomeScreen() {
+  const router = useRouter();
+
+  const handleCategoryPress = (categoryId: string) => {
+    router.push({
+      pathname: "/category/[id]",
+      params: { id: categoryId },
+    });
+  };
+
+  return (
+    <ScreenContainer className="">
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} className="flex-1">
+        {/* Header */}
+        <View className="px-6 pt-6 pb-4">
+          <Text className="text-3xl font-bold text-foreground">按摩 SPA 知识大全</Text>
+          <Text className="text-sm text-muted mt-2">探索按摩、精油、穴位与养生知识</Text>
+        </View>
+
+        {/* Categories Grid */}
+        <View className="px-6 pb-8">
+          <View className="gap-4 sm:flex-row sm:flex-wrap">
+            {knowledgeData.categories.map((category) => (
+              <Pressable
+                key={category.id}
+                onPress={() => handleCategoryPress(category.id)}
+                className="sm:w-[48%]"
+                style={({ pressed }) => [{
+                  opacity: pressed ? 0.7 : 1,
+                }]}
+              >
+                <View
+                  className="rounded-2xl p-5 border border-border"
+                  style={{ backgroundColor: category.color + "20" }}
+                >
+                  <View className="flex-row items-start justify-between">
+                    <View className="flex-1 pr-4">
+                      <Text className="text-lg font-semibold text-foreground">
+                        {category.name}
+                      </Text>
+                      <Text className="text-sm text-muted mt-2 leading-relaxed">
+                        {category.description}
+                      </Text>
+                    </View>
+                    <View
+                      className="w-12 h-12 rounded-full items-center justify-center"
+                      style={{ backgroundColor: category.color }}
+                    >
+                      <Text className="text-2xl">→</Text>
+                    </View>
+                  </View>
+                </View>
+              </Pressable>
+            ))}
+          </View>
+        </View>
+      </ScrollView>
+    </ScreenContainer>
+  );
+}
