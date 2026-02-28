@@ -43,6 +43,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="advisor"
+        options={{
+          title: "AI 顾问",
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="bubble.left.fill" color={color} />,
+        }}
+      />
+      <Tabs.Screen
         name="favorites"
         options={{
           title: "收藏",

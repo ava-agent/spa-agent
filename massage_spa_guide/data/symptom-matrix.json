@@ -1,0 +1,166 @@
+{
+  "zones": [
+    { "id": "head-neck", "name": "头颈", "icon": "🧠" },
+    { "id": "shoulders", "name": "肩膀", "icon": "💪" },
+    { "id": "upper-back", "name": "上背", "icon": "🔙" },
+    { "id": "lower-back", "name": "腰部", "icon": "⚡" },
+    { "id": "legs", "name": "腿部", "icon": "🦵" },
+    { "id": "feet", "name": "足部", "icon": "🦶" }
+  ],
+  "types": [
+    { "id": "soreness", "name": "酸痛", "icon": "😣" },
+    { "id": "stiffness", "name": "僵硬", "icon": "🪨" },
+    { "id": "tension", "name": "紧绷", "icon": "😤" },
+    { "id": "sharp-pain", "name": "刺痛", "icon": "⚡" },
+    { "id": "fatigue", "name": "疲劳", "icon": "😴" }
+  ],
+  "causes": [
+    { "id": "desk-work", "name": "久坐工作", "icon": "💻" },
+    { "id": "exercise", "name": "运动锻炼", "icon": "🏋️" },
+    { "id": "bad-sleep", "name": "睡姿不良", "icon": "🛏️" },
+    { "id": "stress", "name": "压力大", "icon": "😰" },
+    { "id": "unknown", "name": "不确定", "icon": "🤷" }
+  ],
+  "rules": [
+    {
+      "zones": ["head-neck"],
+      "types": ["soreness", "stiffness", "tension"],
+      "causes": ["desk-work", "stress", "bad-sleep"],
+      "recommendation": {
+        "technique": { "id": "techniques-002", "name": "深层组织按摩", "reason": "针对颈部深层肌肉僵硬" },
+        "acupoints": [
+          { "id": "acupoints-001", "name": "合谷穴", "reason": "缓解头痛、颈痛的经典穴位" },
+          { "id": "acupoints-002", "name": "内关穴", "reason": "调节神经、缓解紧张" }
+        ],
+        "oil": { "id": "oils-002", "name": "薄荷精油", "reason": "清凉舒缓，缓解头颈不适" },
+        "timerRoutine": "office-rescue"
+      }
+    },
+    {
+      "zones": ["head-neck"],
+      "types": ["sharp-pain", "fatigue"],
+      "causes": ["desk-work", "stress", "bad-sleep", "exercise", "unknown"],
+      "recommendation": {
+        "technique": { "id": "techniques-001", "name": "瑞典式按摩", "reason": "轻柔放松，适合头颈敏感区域" },
+        "acupoints": [
+          { "id": "acupoints-001", "name": "合谷穴", "reason": "止痛要穴" },
+          { "id": "acupoints-003", "name": "足三里", "reason": "增强体质、缓解疲劳" }
+        ],
+        "oil": { "id": "oils-001", "name": "薰衣草精油", "reason": "镇静安神、缓解疼痛" },
+        "timerRoutine": "sleep-aid"
+      }
+    },
+    {
+      "zones": ["shoulders", "upper-back"],
+      "types": ["soreness", "stiffness", "tension"],
+      "causes": ["desk-work", "stress"],
+      "recommendation": {
+        "technique": { "id": "techniques-002", "name": "深层组织按摩", "reason": "深入松解肩背肌筋膜" },
+        "acupoints": [
+          { "id": "acupoints-001", "name": "合谷穴", "reason": "疏通上肢经络" },
+          { "id": "acupoints-002", "name": "内关穴", "reason": "宽胸理气、缓解紧张" }
+        ],
+        "oil": { "id": "oils-003", "name": "迷迭香精油", "reason": "促进血液循环、缓解肌肉酸痛" },
+        "timerRoutine": "office-rescue"
+      }
+    },
+    {
+      "zones": ["shoulders", "upper-back"],
+      "types": ["soreness", "stiffness", "fatigue"],
+      "causes": ["exercise", "unknown"],
+      "recommendation": {
+        "technique": { "id": "techniques-001", "name": "瑞典式按摩", "reason": "运动后放松肌肉的经典选择" },
+        "acupoints": [
+          { "id": "acupoints-003", "name": "足三里", "reason": "恢复体力、增强耐力" },
+          { "id": "acupoints-001", "name": "合谷穴", "reason": "全身止痛要穴" }
+        ],
+        "oil": { "id": "oils-004", "name": "尤加利精油", "reason": "舒缓肌肉、清爽提神" },
+        "timerRoutine": "workout-recovery"
+      }
+    },
+    {
+      "zones": ["shoulders", "upper-back"],
+      "types": ["sharp-pain", "tension"],
+      "causes": ["bad-sleep", "exercise", "unknown"],
+      "recommendation": {
+        "technique": { "id": "techniques-004", "name": "中医推拿", "reason": "点穴推拿针对性强" },
+        "acupoints": [
+          { "id": "acupoints-002", "name": "内关穴", "reason": "缓解胸闷和上背紧张" },
+          { "id": "acupoints-001", "name": "合谷穴", "reason": "镇痛效果显著" }
+        ],
+        "oil": { "id": "oils-001", "name": "薰衣草精油", "reason": "舒缓疼痛、放松身心" },
+        "timerRoutine": "sleep-aid"
+      }
+    },
+    {
+      "zones": ["lower-back"],
+      "types": ["soreness", "stiffness", "tension", "sharp-pain"],
+      "causes": ["desk-work", "bad-sleep"],
+      "recommendation": {
+        "technique": { "id": "techniques-002", "name": "深层组织按摩", "reason": "深层松解腰部肌肉紧张" },
+        "acupoints": [
+          { "id": "acupoints-003", "name": "足三里", "reason": "「长寿穴」强腰健肾" },
+          { "id": "acupoints-004", "name": "三阴交", "reason": "调理下焦、缓解腰痛" }
+        ],
+        "oil": { "id": "oils-003", "name": "迷迭香精油", "reason": "温热促循环、缓解腰部酸痛" },
+        "timerRoutine": "office-rescue"
+      }
+    },
+    {
+      "zones": ["lower-back"],
+      "types": ["soreness", "stiffness", "fatigue"],
+      "causes": ["exercise", "stress", "unknown"],
+      "recommendation": {
+        "technique": { "id": "techniques-003", "name": "泰式按摩", "reason": "拉伸结合按压，全面放松腰部" },
+        "acupoints": [
+          { "id": "acupoints-003", "name": "足三里", "reason": "增强体力、加速恢复" },
+          { "id": "acupoints-004", "name": "三阴交", "reason": "调理气血、缓解疲劳" }
+        ],
+        "oil": { "id": "oils-004", "name": "尤加利精油", "reason": "清凉舒缓、缓解运动后酸痛" },
+        "timerRoutine": "workout-recovery"
+      }
+    },
+    {
+      "zones": ["legs"],
+      "types": ["soreness", "stiffness", "fatigue"],
+      "causes": ["exercise", "desk-work", "unknown"],
+      "recommendation": {
+        "technique": { "id": "techniques-001", "name": "瑞典式按摩", "reason": "促进腿部血液循环" },
+        "acupoints": [
+          { "id": "acupoints-003", "name": "足三里", "reason": "腿部第一大穴、消除疲劳" },
+          { "id": "acupoints-004", "name": "三阴交", "reason": "调理下肢气血" }
+        ],
+        "oil": { "id": "oils-003", "name": "迷迭香精油", "reason": "活血化瘀、缓解肌肉酸痛" },
+        "timerRoutine": "workout-recovery"
+      }
+    },
+    {
+      "zones": ["legs"],
+      "types": ["tension", "sharp-pain"],
+      "causes": ["exercise", "stress", "bad-sleep", "desk-work", "unknown"],
+      "recommendation": {
+        "technique": { "id": "techniques-005", "name": "反射疗法", "reason": "通过腿部反射区缓解紧张" },
+        "acupoints": [
+          { "id": "acupoints-003", "name": "足三里", "reason": "疏通经络、镇痛" },
+          { "id": "acupoints-002", "name": "内关穴", "reason": "调节神经、放松肌肉" }
+        ],
+        "oil": { "id": "oils-001", "name": "薰衣草精油", "reason": "镇静止痛" },
+        "timerRoutine": "sleep-aid"
+      }
+    },
+    {
+      "zones": ["feet"],
+      "types": ["soreness", "stiffness", "fatigue", "tension", "sharp-pain"],
+      "causes": ["desk-work", "exercise", "bad-sleep", "stress", "unknown"],
+      "recommendation": {
+        "technique": { "id": "techniques-005", "name": "反射疗法", "reason": "足底反射疗法直接作用于足部" },
+        "acupoints": [
+          { "id": "acupoints-003", "name": "足三里", "reason": "下肢主穴" },
+          { "id": "acupoints-004", "name": "三阴交", "reason": "调理足部经络" }
+        ],
+        "oil": { "id": "oils-002", "name": "薄荷精油", "reason": "清凉提神、缓解足部疲劳" },
+        "timerRoutine": "workout-recovery"
+      }
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { ScrollView, Text, View, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
+import { ChallengeCard } from "@/components/challenge-card";
 import knowledgeData from "@/data/knowledge.json";
 
 export default function HomeScreen() {
@@ -22,7 +23,50 @@ export default function HomeScreen() {
           <Text className="text-sm text-muted mt-2">探索按摩、精油、穴位与养生知识</Text>
         </View>
 
-        {/* Categories Grid */}
+        {/* Daily Challenge Card */}
+        <View className="px-6 pb-4">
+          <ChallengeCard />
+        </View>
+
+        {/* Tools Row */}
+        <View className="px-6 pb-6">
+          <Text className="text-lg font-semibold text-foreground mb-3">实用工具</Text>
+          <View className="flex-row gap-3">
+            <Pressable
+              onPress={() => router.push("/tools/symptom-match")}
+              className="flex-1"
+              style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+            >
+              <View
+                className="rounded-2xl p-4 border border-border items-center"
+                style={{ backgroundColor: "#D4A57420" }}
+              >
+                <Text className="text-3xl mb-2">🩺</Text>
+                <Text className="text-sm font-semibold text-foreground">症状速配</Text>
+                <Text className="text-xs text-muted mt-1">3 步匹配方案</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              onPress={() => router.push("/tools/acupoint-timer")}
+              className="flex-1"
+              style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+            >
+              <View
+                className="rounded-2xl p-4 border border-border items-center"
+                style={{ backgroundColor: "#6BA58720" }}
+              >
+                <Text className="text-3xl mb-2">⏱️</Text>
+                <Text className="text-sm font-semibold text-foreground">穴位计时器</Text>
+                <Text className="text-xs text-muted mt-1">跟随节奏按摩</Text>
+              </View>
+            </Pressable>
+          </View>
+        </View>
+
+        {/* Knowledge Categories */}
+        <View className="px-6 pb-2">
+          <Text className="text-lg font-semibold text-foreground mb-3">知识分类</Text>
+        </View>
         <View className="px-6 pb-8">
           <View className="gap-4 sm:flex-row sm:flex-wrap">
             {knowledgeData.categories.map((category) => (
