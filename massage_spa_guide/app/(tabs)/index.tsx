@@ -28,6 +28,34 @@ export default function HomeScreen() {
           <ChallengeCard />
         </View>
 
+        {/* Men's Guide Banner */}
+        <View className="px-6 pb-4">
+          <Pressable
+            onPress={() => router.push("/tools/mens-guide" as any)}
+            style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+          >
+            <View
+              className="rounded-2xl p-4 flex-row items-center overflow-hidden"
+              style={{ backgroundColor: "#1a1a2e" }}
+            >
+              <View className="flex-1 pr-3">
+                <View className="flex-row items-center">
+                  <Text className="text-lg font-bold text-white">男士按摩指南</Text>
+                  <View className="ml-2 px-2 py-0.5 rounded-full bg-white/20">
+                    <Text className="text-xs text-white">HOT</Text>
+                  </View>
+                </View>
+                <Text className="text-sm text-white/70 mt-1">
+                  补肾壮阳 · 健身恢复 · 压力释放
+                </Text>
+              </View>
+              <View className="w-14 h-14 rounded-full bg-white/10 items-center justify-center">
+                <Text className="text-3xl">💪</Text>
+              </View>
+            </View>
+          </Pressable>
+        </View>
+
         {/* Tools Row */}
         <View className="px-6 pb-6">
           <Text className="text-lg font-semibold text-foreground mb-3">实用工具</Text>
