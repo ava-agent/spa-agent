@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A Massage & SPA knowledge encyclopedia mobile app (按摩 SPA 知识大全) built with Expo + React Native. Users browse categorized knowledge articles about massage techniques, essential oils, acupoints, and SPA etiquette. Content is stored as a local JSON file (`data/knowledge.json`), with favorites persisted via AsyncStorage.
+A Massage & SPA knowledge encyclopedia mobile app (按摩 SPA 知识大全) built with Expo + React Native. Users browse categorized knowledge articles about massage techniques, essential oils, acupoints, and SPA etiquette. The app also includes interactive tools like symptom matching, acupoint timer, daily challenges, AI advisor, and knowledge quizzes. Content is stored as local JSON files, with favorites persisted via AsyncStorage.
 
 The main application code lives inside `massage_spa_guide/`.
 
@@ -33,9 +33,16 @@ Package manager: **pnpm** (v9.12.0)
 
 ### Frontend (Expo Router file-based routing)
 
-- `app/(tabs)/` — Bottom tab screens: Home (index), Search, Favorites
+- `app/(tabs)/` — Bottom tab screens: Home (index), Search, AI Advisor, Favorites
 - `app/category/[id]` — Category detail page listing articles
 - `app/knowledge/[id]` — Individual knowledge article detail
+- `app/tools/` — Interactive tools:
+  - `symptom-match.tsx` — 3-step symptom-based massage recommendations
+  - `acupoint-timer.tsx` — Guided massage timer with routines
+  - `daily-challenge.tsx` — Daily wellness challenge
+  - `challenge-stats.tsx` — Challenge statistics & streak calendar
+  - `mens-guide.tsx` — Men's health massage guide
+  - `mens-quiz.tsx` — Knowledge quiz game
 - `app/oauth/` — OAuth callback handler (for native auth flow)
 - `app/_layout.tsx` — Root layout with tRPC/React Query providers and theme setup
 
@@ -49,7 +56,10 @@ Package manager: **pnpm** (v9.12.0)
 
 ### Data Layer
 
-- `data/knowledge.json` — All knowledge content (5 categories, 22 articles) loaded client-side
+- `data/knowledge.json` — All knowledge content (6 categories, 30 articles) loaded client-side
+- `data/symptom-matrix.json` — Symptom matching rules for recommendations
+- `data/routines.json` — Massage routines for acupoint timer
+- `data/challenges.json` — Daily challenge definitions (30 challenges)
 - `drizzle/schema.ts` — Database table definitions (PostgreSQL via Drizzle ORM, table: `spa_users`)
 - `drizzle.config.ts` — Drizzle config (`dialect: "postgresql"`)
 

@@ -15,7 +15,23 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
 
 ## Features
 
-- 22 knowledge articles across 5 categories (basics, techniques, oils, acupoints, SPA etiquette)
+### Content
+- **30 knowledge articles** across 6 categories
+  - 按摩基础知识 (Basics)
+  - 常见按摩技法 (Techniques)
+  - 精油与香薰 (Essential Oils)
+  - 穴位与经络 (Acupoints)
+  - SPA 礼仪与体验 (SPA Etiquette)
+  - **男士按摩指南** (Men's Health) - NEW!
+
+### Interactive Tools
+- **症状速配** (Symptom Match) - 3-step massage recommendation based on symptoms
+- **穴位计时器** (Acupoint Timer) - Guided massage with rhythm and timing
+- **每日挑战** (Daily Challenge) - 30-day wellness challenge with streak tracking
+- **AI 顾问** (AI Advisor) - Intelligent Q&A for massage and wellness
+- **知识问答** (Knowledge Quiz) - Interactive quiz to test your knowledge
+
+### Core Features
 - Full-text search with hot search tags
 - Favorites with local persistence (AsyncStorage)
 - Responsive layout (mobile, tablet, desktop)
@@ -46,17 +62,32 @@ pnpm dev
 
 ```
 massage_spa_guide/
-  app/              # Expo Router screens
-    (tabs)/         # Bottom tab navigation (Home, Search, Favorites)
-    category/[id]   # Category listing
-    knowledge/[id]  # Article detail
-  api/              # Vercel serverless entry point
-  data/             # Static knowledge content (JSON)
-  server/           # Express + tRPC backend
-  drizzle/          # Database schema & migrations
-  components/       # Reusable UI components
-  lib/              # Client utilities (tRPC, theme)
-  hooks/            # React hooks
+  app/                    # Expo Router screens
+    (tabs)/               # Bottom tab navigation
+      index.tsx           # Home with tools & categories
+      search.tsx          # Full-text search
+      advisor.tsx         # AI chat advisor
+      favorites.tsx       # Saved articles
+    category/[id]         # Category listing
+    knowledge/[id]        # Article detail
+    tools/                # Interactive tools
+      symptom-match.tsx   # Symptom-based recommendations
+      acupoint-timer.tsx  # Guided massage timer
+      daily-challenge.tsx # Daily wellness challenge
+      challenge-stats.tsx # Challenge statistics
+      mens-guide.tsx      # Men's health guide (NEW)
+      mens-quiz.tsx       # Knowledge quiz (NEW)
+  api/                    # Vercel serverless entry point
+  data/                   # Static knowledge content (JSON)
+    knowledge.json        # All articles & categories
+    symptom-matrix.json   # Symptom matching rules
+    routines.json         # Massage routines
+    challenges.json       # Daily challenges
+  server/                 # Express + tRPC backend
+  drizzle/                # Database schema & migrations
+  components/             # Reusable UI components
+  lib/                    # Client utilities (tRPC, theme)
+  hooks/                  # React hooks
 ```
 
 ## Deployment
