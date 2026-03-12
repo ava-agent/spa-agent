@@ -8,7 +8,7 @@ A Massage & SPA knowledge encyclopedia mobile app (按摩 SPA 知识大全) buil
 
 The main application code lives inside `massage_spa_guide/`.
 
-**Live site**: https://massagespaguide.vercel.app
+**Live site**: https://spa.rxcloud.group
 
 ## Commands
 

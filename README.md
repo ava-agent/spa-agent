@@ -2,7 +2,7 @@
 
 A comprehensive massage and SPA knowledge encyclopedia app built with Expo + React Native, deployed on Vercel with Supabase PostgreSQL.
 
-**Live**: https://massagespaguide.vercel.app
+**Live**: https://spa.rxcloud.group
 
 ## Features Overview
 
