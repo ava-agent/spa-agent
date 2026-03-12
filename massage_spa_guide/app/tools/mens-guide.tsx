@@ -151,6 +151,67 @@ export default function MensGuideScreen() {
           </Pressable>
         </View>
 
+        {/* Interactive Tools */}
+        <View className="px-6 pb-4">
+          <Text className="text-lg font-semibold text-foreground mb-3">
+            互动体验
+          </Text>
+          <View className="gap-3">
+            <Pressable
+              onPress={() => router.push("/tools/scenario-sim" as any)}
+              style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+            >
+              <View
+                className="rounded-2xl p-4 flex-row items-center overflow-hidden"
+                style={{
+                  backgroundColor: "#D4A57420",
+                  borderWidth: 1,
+                  borderColor: "#D4A57440",
+                }}
+              >
+                <View className="w-12 h-12 rounded-xl items-center justify-center mr-4 bg-[#D4A574]">
+                  <Text className="text-2xl">🎭</Text>
+                </View>
+                <View className="flex-1">
+                  <Text className="text-base font-semibold text-foreground">
+                    情景模拟
+                  </Text>
+                  <Text className="text-sm text-muted mt-1">
+                    6 大场景，每个选择影响结局
+                  </Text>
+                </View>
+                <Ionicons name="chevron-forward" size={20} color="#999" />
+              </View>
+            </Pressable>
+            <Pressable
+              onPress={() => router.push("/tools/technician-chat" as any)}
+              style={({ pressed }) => [{ opacity: pressed ? 0.7 : 1 }]}
+            >
+              <View
+                className="rounded-2xl p-4 flex-row items-center overflow-hidden"
+                style={{
+                  backgroundColor: "#4A90A420",
+                  borderWidth: 1,
+                  borderColor: "#4A90A440",
+                }}
+              >
+                <View className="w-12 h-12 rounded-xl items-center justify-center mr-4 bg-[#4A90A4]">
+                  <Text className="text-2xl">💬</Text>
+                </View>
+                <View className="flex-1">
+                  <Text className="text-base font-semibold text-foreground">
+                    技师对话
+                  </Text>
+                  <Text className="text-sm text-muted mt-1">
+                    AI 扮演技师，练习应对话术
+                  </Text>
+                </View>
+                <Ionicons name="chevron-forward" size={20} color="#999" />
+              </View>
+            </Pressable>
+          </View>
+        </View>
+
         {/* Quick Actions */}
         <View className="px-6 pb-4">
           <Text className="text-lg font-semibold text-foreground mb-3">
