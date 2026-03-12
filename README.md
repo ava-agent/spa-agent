@@ -35,7 +35,7 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
   - 精油与香薰 (Essential Oils)
   - 穴位与经络 (Acupoints)
   - SPA 礼仪与体验 (SPA Etiquette)
-  - 男士按摩指南 (Men's Health)
+  - 男士 SPA 消费指南 (Men's SPA Guide)
 
 ### Interactive Tools
 - **症状速配** (Symptom Match) - 3-step massage recommendation based on symptoms
@@ -52,10 +52,10 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
 - Sub-heading detection for structured content rendering
 - Related article recommendations
 
-## Architecture
+## System Architecture
 
 <p align="center">
-  <img src="massage_spa_guide/docs/screenshots/architecture.png" width="700" alt="Architecture" />
+  <img src="massage_spa_guide/docs/screenshots/system-architecture.png" width="700" alt="System Architecture" />
 </p>
 
 | Layer | Technology |
@@ -64,8 +64,38 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
 | Styling | NativeWind (Tailwind CSS for RN) |
 | Routing | Expo Router (file-based) |
 | Backend | Express + tRPC v11 |
+| AI / LLM | Gemini 2.5 Flash via Forge API |
 | Database | Supabase PostgreSQL + Drizzle ORM |
 | Deployment | Vercel (static + serverless) |
+
+## AI Agent Design
+
+The AI Advisor uses a **RAG-like pattern**: knowledge articles are indexed in the system prompt, the LLM references article IDs in responses, and the client renders them as clickable deep links.
+
+<p align="center">
+  <img src="massage_spa_guide/docs/screenshots/ai-agent-design.png" width="700" alt="AI Agent Design" />
+</p>
+
+**Key design decisions:**
+- **Knowledge Index in System Prompt** — 30 article IDs + acupoint/oil quick reference injected as context, avoiding vector DB complexity
+- **10-message Sliding Window** — balances conversation continuity vs. token cost
+- **Article Link Parsing** — LLM outputs `[title](article:ID)` format, client-side ChatBubble parses into navigable `Pressable` components
+- **Stateless Server** — no server-side chat storage; client owns persistence via AsyncStorage (50 msg limit)
+- **Thinking Budget** — Gemini 2.5 Flash with 128-token thinking budget for reasoning
+
+## Agent Execution Flow
+
+<p align="center">
+  <img src="massage_spa_guide/docs/screenshots/agent-execution-flow.png" width="700" alt="Agent Execution Flow" />
+</p>
+
+**Request lifecycle:**
+1. User sends query → `useChat` hook extracts last 10 messages as context
+2. tRPC mutation posts to `advisor.chat` (superjson serialized, Zod validated)
+3. Server prepends system prompt (knowledge index + acupoint/oil reference + rules)
+4. Forge API call → Gemini 2.5 Flash processes with thinking budget
+5. Response with `[article](article:ID)` links returned to client
+6. ChatBubble renders clickable article links → user navigates to full knowledge detail
 
 ## User Flow
 
@@ -98,8 +128,8 @@ massage_spa_guide/
       acupoint-timer.tsx  # Guided massage timer
       daily-challenge.tsx # Daily wellness challenge
       challenge-stats.tsx # Challenge statistics
-      mens-guide.tsx      # Men's health guide
-      mens-quiz.tsx       # Knowledge quiz
+      mens-guide.tsx      # Men's SPA consumer guide
+      mens-quiz.tsx       # Consumer knowledge quiz
   api/                    # Vercel serverless entry point
   data/                   # Static knowledge content (JSON)
     knowledge.json        # All articles & categories
