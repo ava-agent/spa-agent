@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 
 import { invokeLLM } from "./_core/llm";
@@ -73,9 +74,25 @@ export const advisorRouter = router({
         })),
       ];
 
-      const result = await invokeLLM({ messages: llmMessages });
+      let result;
+      try {
+        result = await invokeLLM({ messages: llmMessages });
+      } catch (err) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "AI 服务暂时不可用，请稍后重试",
+          cause: err,
+        });
+      }
 
-      const choice = result.choices[0];
+      const choice = result.choices?.[0];
+      if (!choice) {
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "AI 未返回有效回复，请重试",
+        });
+      }
+
       let reply = "";
       if (typeof choice.message.content === "string") {
         reply = choice.message.content;
