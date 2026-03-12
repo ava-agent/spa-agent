@@ -2,7 +2,7 @@ import { ScrollView, Text, View, Pressable } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import knowledgeData from "@/data/knowledge.json";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function KnowledgeScreen() {
@@ -13,11 +13,7 @@ export default function KnowledgeScreen() {
   const item = knowledgeData.knowledge.find((k) => k.id === id);
   const category = knowledgeData.categories.find((c) => c.id === item?.category);
 
-  useEffect(() => {
-    checkFavorite();
-  }, [id]);
-
-  const checkFavorite = async () => {
+  const checkFavorite = useCallback(async () => {
     try {
       const favorites = await AsyncStorage.getItem("favorites");
       if (favorites) {
@@ -27,7 +23,11 @@ export default function KnowledgeScreen() {
     } catch (error) {
       console.error("Error checking favorite:", error);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    checkFavorite();
+  }, [checkFavorite]);
 
   const toggleFavorite = async () => {
     try {

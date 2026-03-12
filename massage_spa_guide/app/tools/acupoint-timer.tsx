@@ -112,8 +112,6 @@ export default function AcupointTimerScreen() {
   // --- Active phase ---
   if (phase === "active" && selectedRoutine && timer.currentStep) {
     const ringSize = 220;
-    const circumference = Math.PI * (ringSize - 16);
-    const strokeDashoffset = circumference * (1 - timer.progress);
 
     return (
       <ScreenContainer>

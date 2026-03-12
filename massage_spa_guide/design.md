@@ -84,7 +84,21 @@
 - SPA 中的礼仪规范
 - SPA 后护理建议
 
+#### 6. **男士 SPA 消费指南**
+- SPA 行业黑话大全
+- 荤场 vs 素场辨别
+- 各类项目详解与价格
+- 首次消费完全攻略
+- 防坑指南与常见套路
+- 全国城市消费地图
+- 高端会所体验指南
+- 安全与健康须知
+
 ---
+
+## 用户导航流程
+
+![User Flow](docs/screenshots/user-flow.png)
 
 ## 关键用户流程
 
@@ -144,14 +158,20 @@
 
 ---
 
+## 技术架构
+
+![Architecture](docs/screenshots/architecture.png)
+
 ## 技术实现细节
 
 - **框架**: Expo + React Native + TypeScript
 - **样式**: NativeWind (Tailwind CSS)
 - **导航**: Expo Router
+- **后端**: Express + tRPC v11
+- **数据库**: Supabase PostgreSQL + Drizzle ORM
 - **本地存储**: AsyncStorage（用于收藏功能）
 - **搜索**: 客户端全文搜索（基于 JSON 数据）
-- **图片**: 本地资源或网络 URL
+- **部署**: Vercel（静态前端 + Serverless API）
 
 ---
 
@@ -161,7 +181,7 @@
 interface KnowledgeItem {
   id: string;
   title: string;
-  category: 'basics' | 'techniques' | 'oils' | 'acupoints' | 'spa-etiquette';
+  category: 'basics' | 'techniques' | 'oils' | 'acupoints' | 'spa-etiquette' | 'mens-health';
   description: string;
   content: string; // 富文本或 Markdown
   readingTime: number; // 分钟

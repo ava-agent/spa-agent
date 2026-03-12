@@ -4,6 +4,12 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
 
 **Live**: https://massagespaguide.vercel.app
 
+## Features Overview
+
+<p align="center">
+  <img src="massage_spa_guide/docs/screenshots/features-overview.png" width="700" alt="Features Overview" />
+</p>
+
 ## Screenshots
 
 <p align="center">
@@ -11,6 +17,13 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
   <img src="massage_spa_guide/docs/screenshots/category.png" width="200" alt="Category" />
   <img src="massage_spa_guide/docs/screenshots/article.png" width="200" alt="Article" />
   <img src="massage_spa_guide/docs/screenshots/search.png" width="200" alt="Search" />
+</p>
+
+<p align="center">
+  <img src="massage_spa_guide/docs/screenshots/symptom-match.png" width="200" alt="Symptom Match" />
+  <img src="massage_spa_guide/docs/screenshots/acupoint-timer.png" width="200" alt="Acupoint Timer" />
+  <img src="massage_spa_guide/docs/screenshots/daily-challenge.png" width="200" alt="Daily Challenge" />
+  <img src="massage_spa_guide/docs/screenshots/ai-advisor.png" width="200" alt="AI Advisor" />
 </p>
 
 ## Features
@@ -22,7 +35,7 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
   - 精油与香薰 (Essential Oils)
   - 穴位与经络 (Acupoints)
   - SPA 礼仪与体验 (SPA Etiquette)
-  - **男士按摩指南** (Men's Health) - NEW!
+  - 男士按摩指南 (Men's Health)
 
 ### Interactive Tools
 - **症状速配** (Symptom Match) - 3-step massage recommendation based on symptoms
@@ -39,7 +52,11 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
 - Sub-heading detection for structured content rendering
 - Related article recommendations
 
-## Tech Stack
+## Architecture
+
+<p align="center">
+  <img src="massage_spa_guide/docs/screenshots/architecture.png" width="700" alt="Architecture" />
+</p>
 
 | Layer | Technology |
 |---|---|
@@ -49,6 +66,12 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
 | Backend | Express + tRPC v11 |
 | Database | Supabase PostgreSQL + Drizzle ORM |
 | Deployment | Vercel (static + serverless) |
+
+## User Flow
+
+<p align="center">
+  <img src="massage_spa_guide/docs/screenshots/user-flow.png" width="700" alt="User Flow" />
+</p>
 
 ## Getting Started
 
@@ -75,8 +98,8 @@ massage_spa_guide/
       acupoint-timer.tsx  # Guided massage timer
       daily-challenge.tsx # Daily wellness challenge
       challenge-stats.tsx # Challenge statistics
-      mens-guide.tsx      # Men's health guide (NEW)
-      mens-quiz.tsx       # Knowledge quiz (NEW)
+      mens-guide.tsx      # Men's health guide
+      mens-quiz.tsx       # Knowledge quiz
   api/                    # Vercel serverless entry point
   data/                   # Static knowledge content (JSON)
     knowledge.json        # All articles & categories

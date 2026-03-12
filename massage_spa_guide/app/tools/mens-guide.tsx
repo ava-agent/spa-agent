@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, Pressable, Image } from "react-native";
+import { ScrollView, Text, View, Pressable } from "react-native";
 import { useRouter, Stack } from "expo-router";
 import { ScreenContainer } from "@/components/screen-container";
 import { Ionicons } from "@expo/vector-icons";
@@ -10,52 +10,52 @@ const mensArticles = knowledgeData.knowledge.filter(
 
 const featuredTips = [
   {
-    icon: "🔥",
-    title: "补肾壮阳",
-    desc: "关元、气海、命门",
+    icon: "🗣️",
+    title: "黑话术语",
+    desc: "一次搞懂行话",
     color: "#E85D4C",
   },
   {
-    icon: "💪",
-    title: "健身恢复",
-    desc: "肌肉放松技巧",
+    icon: "🔍",
+    title: "荤素辨别",
+    desc: "一眼看懂门道",
     color: "#4A90A4",
   },
   {
-    icon: "😌",
-    title: "减压放松",
-    desc: "职场压力释放",
+    icon: "🛡️",
+    title: "防坑避雷",
+    desc: "少花冤枉钱",
     color: "#6BA587",
   },
   {
-    icon: "💑",
-    title: "互动按摩",
-    desc: "增进感情秘诀",
+    icon: "💰",
+    title: "消费参考",
+    desc: "各档次价格一览",
     color: "#C85A54",
   },
 ];
 
 const quickActions = [
   {
-    icon: "fitness",
-    title: "运动后恢复",
-    subtitle: "肌肉酸痛？5分钟快速缓解",
-    articleId: "mens-003",
-    gradient: ["#4A90A4", "#357ABD"],
-  },
-  {
-    icon: "moon",
-    title: "睡前补肾",
-    subtitle: "涌泉穴按摩，改善睡眠",
+    icon: "book",
+    title: "行业黑话速查",
+    subtitle: "听不懂暗语？一篇全搞定",
     articleId: "mens-001",
-    gradient: ["#6B5B95", "#524A6B"],
+    gradient: ["#E85D4C", "#C94A3A"],
   },
   {
-    icon: "briefcase",
-    title: "办公室减压",
-    subtitle: "5分钟快速放松肩颈",
+    icon: "shield-checkmark",
+    title: "防坑指南",
+    subtitle: "老司机总结的避雷经验",
+    articleId: "mens-005",
+    gradient: ["#6BA587", "#4A8B6E"],
+  },
+  {
+    icon: "navigate",
+    title: "首次消费攻略",
+    subtitle: "从进门到出门完整流程",
     articleId: "mens-004",
-    gradient: ["#E85D4C", "#C94A3A"],
+    gradient: ["#4A90A4", "#357ABD"],
   },
 ];
 
@@ -73,7 +73,7 @@ export default function MensGuideScreen() {
     <ScreenContainer className="">
       <Stack.Screen
         options={{
-          title: "男士按摩指南",
+          title: "男士 SPA 指南",
           headerBackTitle: "返回",
         }}
       />
@@ -89,17 +89,17 @@ export default function MensGuideScreen() {
             <View className="flex-row items-center justify-between">
               <View className="flex-1 pr-4">
                 <Text className="text-3xl font-bold text-white mb-2">
-                  男士专属
+                  老司机指南
                 </Text>
                 <Text className="text-lg text-white/80 mb-1">
-                  健康养生按摩秘籍
+                  男士 SPA 消费百科
                 </Text>
                 <Text className="text-sm text-white/60">
-                  传统中医智慧 × 现代生活方式
+                  黑话解读 / 防坑攻略 / 消费指南
                 </Text>
               </View>
               <View className="w-20 h-20 rounded-full bg-white/10 items-center justify-center">
-                <Text className="text-4xl">💪</Text>
+                <Text className="text-4xl">🧭</Text>
               </View>
             </View>
 
@@ -107,15 +107,15 @@ export default function MensGuideScreen() {
             <View className="flex-row mt-6 pt-4 border-t border-white/20">
               <View className="flex-1 items-center">
                 <Text className="text-2xl font-bold text-white">8</Text>
-                <Text className="text-xs text-white/60">专业文章</Text>
+                <Text className="text-xs text-white/60">实战攻略</Text>
               </View>
               <View className="flex-1 items-center border-l border-r border-white/20">
-                <Text className="text-2xl font-bold text-white">20+</Text>
-                <Text className="text-xs text-white/60">核心穴位</Text>
+                <Text className="text-2xl font-bold text-white">50+</Text>
+                <Text className="text-xs text-white/60">行业术语</Text>
               </View>
               <View className="flex-1 items-center">
-                <Text className="text-2xl font-bold text-white">5min</Text>
-                <Text className="text-xs text-white/60">快速见效</Text>
+                <Text className="text-2xl font-bold text-white">全国</Text>
+                <Text className="text-xs text-white/60">城市覆盖</Text>
               </View>
             </View>
           </View>
@@ -140,10 +140,10 @@ export default function MensGuideScreen() {
               </View>
               <View className="flex-1">
                 <Text className="text-base font-semibold text-foreground">
-                  知识问答挑战
+                  消费知识测试
                 </Text>
                 <Text className="text-sm text-muted mt-1">
-                  8 道题测试你的按摩知识
+                  8 道题测测你是不是老司机
                 </Text>
               </View>
               <Ionicons name="chevron-forward" size={20} color="#999" />
@@ -154,7 +154,7 @@ export default function MensGuideScreen() {
         {/* Quick Actions */}
         <View className="px-6 pb-4">
           <Text className="text-lg font-semibold text-foreground mb-3">
-            快速开始
+            快速入门
           </Text>
           <View className="gap-3">
             {quickActions.map((action, index) => (
@@ -195,7 +195,7 @@ export default function MensGuideScreen() {
         {/* Featured Tips */}
         <View className="px-6 pb-4">
           <Text className="text-lg font-semibold text-foreground mb-3">
-            核心功效
+            核心板块
           </Text>
           <View className="flex-row flex-wrap gap-3">
             {featuredTips.map((tip, index) => (
@@ -220,7 +220,7 @@ export default function MensGuideScreen() {
         {/* All Articles */}
         <View className="px-6 pb-2">
           <Text className="text-lg font-semibold text-foreground mb-3">
-            全部文章
+            全部攻略
           </Text>
         </View>
         <View className="px-6 pb-8">
@@ -273,7 +273,7 @@ export default function MensGuideScreen() {
             <View className="flex-row items-start">
               <Ionicons name="information-circle" size={20} color="#999" />
               <Text className="text-xs text-muted ml-2 flex-1 leading-relaxed">
-                本指南内容仅供参考，不能替代专业医疗建议。如有健康问题，请咨询专业医生。
+                本指南内容仅供信息参考。请遵守当地法律法规，注意人身安全和健康防护。
               </Text>
             </View>
           </View>

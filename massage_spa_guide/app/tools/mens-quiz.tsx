@@ -16,67 +16,87 @@ interface QuizQuestion {
 const quizQuestions: QuizQuestion[] = [
   {
     id: "q1",
-    question: "「关元穴」位于肚脐下方多少寸处？",
-    options: ["1 寸", "2 寸", "3 寸", "4 寸"],
+    question: "「水磨」这个项目最早起源于哪个城市？",
+    options: ["上海", "深圳", "东莞", "广州"],
     correctIndex: 2,
     explanation:
-      "关元穴位于肚脐下 3 寸处，是培补元气的要穴，有「千年野山参」之称。",
+      "水磨服务最早起源于东莞，后来扩散到全国各地，是最经典的特色项目之一。",
   },
   {
     id: "q2",
-    question: "以下哪个穴位被称为「长寿穴」？",
-    options: ["涌泉穴", "足三里", "合谷穴", "内关穴"],
-    correctIndex: 1,
+    question: "以下哪个是「荤场」的典型特征？",
+    options: [
+      "美团上有团购",
+      "男女技师都有",
+      "下午开门营业到凌晨",
+      "门面敞亮透光",
+    ],
+    correctIndex: 2,
     explanation:
-      "足三里穴被誉为「长寿穴」，经常按摩可增强体质、提高免疫力。",
+      "荤场通常下午才开门，营业到凌晨。而素场一般 10 点到 22 点，美团有团购，门面敞亮。",
   },
   {
     id: "q3",
-    question: "运动后按摩的最佳时间窗口是？",
-    options: ["立即", "30分钟-2小时", "3-4小时后", "第二天"],
-    correctIndex: 1,
+    question: "技师问「要不要升级一下」，通常是在暗示什么？",
+    options: [
+      "升级房间档次",
+      "换更高级的精油",
+      "增加特殊服务",
+      "延长按摩时间",
+    ],
+    correctIndex: 2,
     explanation:
-      "运动后 30 分钟至 2 小时是最佳恢复窗口期，此时进行按摩效果最好。",
+      "「升级」「加项目」「特色服务」都是常见的试探话术，询问你是否需要特殊服务。",
   },
   {
     id: "q4",
-    question: "「命门穴」位于人体的哪个部位？",
-    options: ["头顶", "手掌", "后腰", "足底"],
+    question: "遇到「仙人跳」最常见的场景是？",
+    options: ["高端连锁会所", "酒店 SPA", "来路不明的小店", "足疗连锁店"],
     correctIndex: 2,
     explanation:
-      "命门穴位于后腰第二腰椎棘突下凹陷处，是肾阳汇聚之地。",
+      "仙人跳多发生在不正规小店或上门服务场景。尽量选择有规模、有口碑的店消费。",
   },
   {
     id: "q5",
-    question: "以下哪种精油最适合运动后肌肉放松？",
-    options: ["薰衣草", "黑胡椒", "柠檬", "玫瑰"],
+    question: "第一次去消费，技师问「老板第一次来吗」，最好怎么回答？",
+    options: [
+      "对，第一次来",
+      "朋友推荐来的",
+      "我经常来各种店",
+      "不回答直接选项目",
+    ],
     correctIndex: 1,
     explanation:
-      "黑胡椒精油有温热、止痛作用，非常适合运动后肌肉酸痛按摩。",
+      "说「朋友推荐的」既不暴露新手身份（容易被宰），也表明有人介绍来的。",
   },
   {
     id: "q6",
-    question: "「涌泉穴」位于足底的什么位置？",
-    options: ["脚跟", "足弓", "前1/3凹陷处", "大脚趾"],
+    question: "以下哪个城市的 SPA 消费性价比最高？",
+    options: ["上海", "北京", "成都", "杭州"],
     correctIndex: 2,
     explanation:
-      "涌泉穴位于足底前 1/3 凹陷处，是肾经起始穴，睡前按摩可改善睡眠。",
+      "成都以性价比著称，价格比一线城市便宜 30-40%，服务态度好，是公认的消费天堂。",
   },
   {
     id: "q7",
-    question: "中医认为「肾为」什么之本？",
-    options: ["后天之本", "先天之本", "气血之本", "阴阳之本"],
+    question: "高危行为后做 HIV 暴露后预防（PEP）的最佳时间窗口是？",
+    options: ["24 小时内", "72 小时内", "一周内", "两周内"],
     correctIndex: 1,
     explanation:
-      "中医认为「肾为先天之本」，肾脏健康对男性至关重要。",
+      "PEP 需要在高危行为后 72 小时内尽早服用，越早效果越好。超过 72 小时则效果大大降低。",
   },
   {
     id: "q8",
-    question: "提肛运动每次收缩应保持多长时间？",
-    options: ["1-2秒", "3-5秒", "10-15秒", "30秒"],
-    correctIndex: 1,
+    question: "以下哪种做法最能有效防止「偷拍勒索」？",
+    options: [
+      "选择高价会所",
+      "给技师小费",
+      "进房间检查可疑设备",
+      "让朋友在外面等",
+    ],
+    correctIndex: 2,
     explanation:
-      "提肛运动每次收缩保持 3-5 秒，每天做 50-100 次，可增强盆底肌肉。",
+      "进房间后检查烟雾报警器、电视、空调出风口等位置是否有隐藏摄像头，是最直接的防护手段。",
   },
 ];
 
@@ -125,11 +145,11 @@ export default function MensQuizScreen() {
 
   const getScoreMessage = () => {
     const percentage = (score / quizQuestions.length) * 100;
-    if (percentage === 100) return { emoji: "🏆", text: "满分！按摩大师！" };
-    if (percentage >= 80) return { emoji: "🎉", text: "优秀！知识渊博！" };
-    if (percentage >= 60) return { emoji: "👍", text: "不错！继续加油！" };
-    if (percentage >= 40) return { emoji: "📚", text: "还需学习哦！" };
-    return { emoji: "💪", text: "多看文章提升吧！" };
+    if (percentage === 100) return { emoji: "🏆", text: "满分！绝对老司机！" };
+    if (percentage >= 80) return { emoji: "🎉", text: "优秀！经验丰富！" };
+    if (percentage >= 60) return { emoji: "👍", text: "不错！基本入门了！" };
+    if (percentage >= 40) return { emoji: "📚", text: "还是新手，多看攻略！" };
+    return { emoji: "🐣", text: "纯小白，先学习再上路！" };
   };
 
   if (showResult) {
@@ -138,7 +158,7 @@ export default function MensQuizScreen() {
       <ScreenContainer className="">
         <Stack.Screen
           options={{
-            title: "知识问答",
+            title: "消费知识测试",
             headerBackTitle: "返回",
           }}
         />
@@ -146,7 +166,7 @@ export default function MensQuizScreen() {
           <View className="items-center">
             <Text className="text-7xl mb-6">{result.emoji}</Text>
             <Text className="text-2xl font-bold text-foreground mb-2">
-              问答完成！
+              测试完成！
             </Text>
             <Text className="text-lg text-muted mb-8">{result.text}</Text>
 
@@ -175,7 +195,7 @@ export default function MensQuizScreen() {
               className="mt-4"
             >
               <Text className="text-[#4A90A4] font-medium">
-                返回男士指南
+                返回消费指南
               </Text>
             </Pressable>
           </View>
@@ -188,7 +208,7 @@ export default function MensQuizScreen() {
     <ScreenContainer className="">
       <Stack.Screen
         options={{
-          title: "知识问答",
+          title: "消费知识测试",
           headerBackTitle: "返回",
         }}
       />

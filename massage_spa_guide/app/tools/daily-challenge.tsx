@@ -3,7 +3,7 @@ import { StreakCalendar } from "@/components/streak-calendar";
 import { useDailyChallenge } from "@/hooks/use-daily-challenge";
 import * as Haptics from "expo-haptics";
 import { useRouter } from "expo-router";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Platform, Pressable, ScrollView, Text, View } from "react-native";
 
 type Phase = "intro" | "active" | "finished";
@@ -38,6 +38,14 @@ export default function DailyChallengeScreen() {
 
   const progress = 1 - secondsLeft / todayChallenge.durationSeconds;
 
+  const handleComplete = useCallback(async () => {
+    if (Platform.OS !== "web") {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    }
+    await completeToday();
+    setPhase("finished");
+  }, [completeToday]);
+
   useEffect(() => {
     if (!isRunning) return;
     intervalRef.current = setInterval(() => {
@@ -54,15 +62,7 @@ export default function DailyChallengeScreen() {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isRunning]);
-
-  async function handleComplete() {
-    if (Platform.OS !== "web") {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    }
-    await completeToday();
-    setPhase("finished");
-  }
+  }, [isRunning, handleComplete]);
 
   function handleStart() {
     haptic();
