@@ -1,5 +1,5 @@
 {
-  "buildCommand": "mkdir -p node_modules/react-native-css-interop/.cache && touch node_modules/react-native-css-interop/.cache/web.css && npx expo export --platform web",
+  "buildCommand": "bash scripts/vercel-build.sh",
   "outputDirectory": "dist",
   "installCommand": "pnpm install",
   "framework": null,
