@@ -20,7 +20,7 @@ Scenario List → Scenario Intro → Decision Node (repeat) → Ending + AI Revi
 - User picks from 6 pre-set scenarios
 - Each scenario has 3-5 branching decision nodes with 3 options each
 - Options are pre-authored with scores and tags
-- At the ending node, call GLM to generate personalized review based on the user's choice path
+- At the ending node, call Ark to generate personalized review based on the user's choice path
 - Final screen: grade (S/A/B/C), total score, AI commentary, related article links
 
 ### Scenarios (6 total)
@@ -71,7 +71,7 @@ interface ScenarioOption {
 
 tRPC call to `advisor.scenarioReview`:
 - Input: scenario ID, user choices (node + option pairs), total score
-- System prompt instructs GLM to review the choices, give advice, reference knowledge articles
+- System prompt instructs Ark to review the choices, give advice, reference knowledge articles
 - Output: review text with article links
 
 ## Feature 2: Technician Chat
@@ -99,7 +99,7 @@ Character Select → Chat Interface → (optional) Review Mode
 Defined as constants in the component file. Each character has:
 - `id`, `name`, `avatar` (emoji), `subtitle`, `description`
 - `color` (theme color for chat UI)
-- `systemPrompt` (full role-play instructions for GLM)
+- `systemPrompt` (full role-play instructions for Ark)
 
 ### System Prompt Pattern
 

@@ -201,18 +201,18 @@ const normalizeToolChoice = (
   return toolChoice;
 };
 
-const resolveApiUrl = () =>
-  ENV.forgeApiUrl && ENV.forgeApiUrl.trim().length > 0
-    ? ENV.forgeApiUrl.replace(/\/$/, "")
-    : "https://open.bigmodel.cn/api/paas/v4/chat/completions";
+const resolveChatCompletionsUrl = () => {
+  const baseUrl = ENV.arkBaseUrl.replace(/\/+$/, "");
+  return baseUrl.endsWith("/chat/completions") ? baseUrl : `${baseUrl}/chat/completions`;
+};
 
 const assertApiKey = () => {
-  if (!ENV.forgeApiKey) {
-    throw new Error("OPENAI_API_KEY is not configured");
+  if (!ENV.arkApiKey) {
+    throw new Error("ARK_API_KEY is not configured");
   }
 };
 
-const normalizeResponseFormat = ({
+const buildStructuredOutputHint = ({
   responseFormat,
   response_format,
   outputSchema,
@@ -222,17 +222,25 @@ const normalizeResponseFormat = ({
   response_format?: ResponseFormat;
   outputSchema?: OutputSchema;
   output_schema?: OutputSchema;
-}):
-  | { type: "json_schema"; json_schema: JsonSchema }
-  | { type: "text" }
-  | { type: "json_object" }
-  | undefined => {
+}): string | undefined => {
   const explicitFormat = responseFormat || response_format;
   if (explicitFormat) {
     if (explicitFormat.type === "json_schema" && !explicitFormat.json_schema?.schema) {
       throw new Error("responseFormat json_schema requires a defined schema object");
     }
-    return explicitFormat;
+    if (explicitFormat.type === "text") return undefined;
+    if (explicitFormat.type === "json_object") {
+      return [
+        "Return only a valid JSON object.",
+        "Do not include Markdown code fences, commentary, or text outside the JSON object.",
+      ].join(" ");
+    }
+
+    return [
+      "Return only valid JSON that matches this JSON Schema.",
+      "Do not include Markdown code fences, commentary, or text outside the JSON object.",
+      JSON.stringify(explicitFormat.json_schema.schema),
+    ].join("\n");
   }
 
   const schema = outputSchema || output_schema;
@@ -242,14 +250,11 @@ const normalizeResponseFormat = ({
     throw new Error("outputSchema requires both name and schema");
   }
 
-  return {
-    type: "json_schema",
-    json_schema: {
-      name: schema.name,
-      schema: schema.schema,
-      ...(typeof schema.strict === "boolean" ? { strict: schema.strict } : {}),
-    },
-  };
+  return [
+    `Return only valid JSON for schema "${schema.name}".`,
+    "Do not include Markdown code fences, commentary, or text outside the JSON object.",
+    JSON.stringify(schema.schema),
+  ].join("\n");
 };
 
 export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
@@ -260,15 +265,28 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     tools,
     toolChoice,
     tool_choice,
+    maxTokens,
+    max_tokens,
     outputSchema,
     output_schema,
     responseFormat,
     response_format,
   } = params;
 
+  const structuredOutputHint = buildStructuredOutputHint({
+    responseFormat,
+    response_format,
+    outputSchema,
+    output_schema,
+  });
+
+  const requestMessages = structuredOutputHint
+    ? [{ role: "system" as const, content: structuredOutputHint }, ...messages]
+    : messages;
+
   const payload: Record<string, unknown> = {
-    model: "glm-4-flash",
-    messages: messages.map(normalizeMessage),
+    model: ENV.arkChatModel,
+    messages: requestMessages.map(normalizeMessage),
   };
 
   if (tools && tools.length > 0) {
@@ -280,24 +298,13 @@ export async function invokeLLM(params: InvokeParams): Promise<InvokeResult> {
     payload.tool_choice = normalizedToolChoice;
   }
 
-  payload.max_tokens = 32768;
+  payload.max_tokens = maxTokens ?? max_tokens ?? 32768;
 
-  const normalizedResponseFormat = normalizeResponseFormat({
-    responseFormat,
-    response_format,
-    outputSchema,
-    output_schema,
-  });
-
-  if (normalizedResponseFormat) {
-    payload.response_format = normalizedResponseFormat;
-  }
-
-  const response = await fetch(resolveApiUrl(), {
+  const response = await fetch(resolveChatCompletionsUrl(), {
     method: "POST",
     headers: {
       "content-type": "application/json",
-      authorization: `Bearer ${ENV.forgeApiKey}`,
+      authorization: `Bearer ${ENV.arkApiKey}`,
     },
     body: JSON.stringify(payload),
   });

@@ -354,7 +354,7 @@ create: protectedProcedure
 
 ## LLM Integration
 
-Use the preconfigured LLM helpers. Credentials are injected from the platform (no manual setup required).
+Use the preconfigured Ark CodingPlan LLM helpers. Credentials must stay on the server and come from deployment environment variables.
 
 ```ts
 import { invokeLLM } from "./server/_core/llm";
@@ -406,46 +406,36 @@ const response = await invokeLLM({
 
 Tips
 - Always call llm functions from server-side code (e.g., inside tRPC procedures), to avoid exposing your API key.
-- You don't need to manually set the model; the helper uses a sensible default.
+- You don't need to manually set the model; the helper reads `ARK_CHAT_MODEL` and falls back to the CodingPlan default.
 - LLM responses often contain markdown. Use `<Streamdown>{content}</Streamdown>` (imported from `streamdown`) to render markdown content with proper formatting and streaming support.
 - For image-based gen AI workflows, local `file://` and blob URLs don't work. Upload to S3 first, then pass the public URL to `invokeLLM()`.
 
-### Structured Responses (JSON Schema)
+### Structured Responses
 
-Ask the model to return structured JSON via `response_format`:
+Ark CodingPlan chat models should be treated as prompt-constrained for JSON output. Ask for JSON explicitly, then parse and validate the returned message content on the server.
 
 ```ts
 import { invokeLLM } from "./server/_core/llm";
 
 const structured = await invokeLLM({
   messages: [
-    { role: "system", content: "You are a helpful assistant designed to output JSON." },
+    {
+      role: "system",
+      content: `You are a helpful assistant. Return only valid JSON:
+{
+  "name": "string",
+  "age": number
+}`,
+    },
     { role: "user", content: "Extract the name and age from the following text: \"My name is Alice and I am 30 years old.\"" },
   ],
-  response_format: {
-    type: "json_schema",
-    json_schema: {
-      name: "person_info",
-      strict: true,
-      schema: {
-        type: "object",
-        properties: {
-          name: { type: "string", description: "The name of the person" },
-          age: { type: "integer", description: "The age of the person" },
-        },
-        required: ["name", "age"],
-        additionalProperties: false,
-      },
-    },
-  },
 });
 
-// The model responds with JSON content matching the schema.
-// Access via `structured.choices[0].message.content` and JSON.parse if needed.
+const data = JSON.parse(structured.choices[0].message.content);
 ```
-The helpers mirror the Python SDK semantics but produce JavaScript-first code, keeping credentials inside the server and ensuring every environment has access to the same token.
 
-**CRITICAL Note:** `json_schema` works for flat structures. For nested arrays/objects, use `json_object` instead.
+For nested arrays or objects, include the expected JSON shape in the system prompt and validate required fields after parsing:
+
 ```ts
 const response = await invokeLLM({
   messages: [
@@ -465,10 +455,11 @@ const response = await invokeLLM({
       ]
     }
   ],
-  response_format: { type: "json_object" }
 });
 const data = JSON.parse(response.choices[0].message.content);
 ```
+
+The helper accepts legacy structured-output parameters for source compatibility, but converts them into prompt instructions instead of sending provider-specific response-format fields.
 
 ---
 
@@ -583,6 +574,9 @@ Available environment variables:
 | `VITE_OAUTH_PORTAL_URL` | Manus login portal URL |
 | `OWNER_OPEN_ID` | Owner's Manus ID |
 | `OWNER_NAME` | Owner's display name |
+| `ARK_API_KEY` | Ark CodingPlan API key for server-side LLM calls |
+| `ARK_BASE_URL` | Ark CodingPlan OpenAI-compatible base URL, defaults to `https://ark.cn-beijing.volces.com/api/coding/v3` |
+| `ARK_CHAT_MODEL` | Ark chat model, defaults to `doubao-seed-2-0-code-preview-260215` |
 | `BUILT_IN_FORGE_API_URL` | Manus API endpoint |
 | `BUILT_IN_FORGE_API_KEY` | Manus API key |
 
