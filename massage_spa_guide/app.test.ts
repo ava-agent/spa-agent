@@ -51,8 +51,8 @@ describe("Knowledge Data Structure", () => {
     });
   });
 
-  it("should have 22 total knowledge items", () => {
-    expect(knowledgeData.knowledge.length).toBe(22);
+  it("should have 30 total knowledge items", () => {
+    expect(knowledgeData.knowledge.length).toBe(30);
   });
 
   it("should have expected number of items per category", () => {
@@ -62,6 +62,7 @@ describe("Knowledge Data Structure", () => {
       oils: 4,
       acupoints: 4,
       "spa-etiquette": 4,
+      "mens-health": 8,
     };
 
     Object.entries(expectedCounts).forEach(([categoryId, expectedCount]) => {

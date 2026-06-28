@@ -64,7 +64,7 @@ A comprehensive massage and SPA knowledge encyclopedia app built with Expo + Rea
 | Styling | NativeWind (Tailwind CSS for RN) |
 | Routing | Expo Router (file-based) |
 | Backend | Express + tRPC v11 |
-| AI / LLM | Gemini 2.5 Flash via Forge API |
+| AI / LLM | Ark CodingPlan via OpenAI-compatible helper |
 | Database | Supabase PostgreSQL + Drizzle ORM |
 | Deployment | Vercel (static + serverless) |
 
@@ -81,7 +81,7 @@ The AI Advisor uses a **RAG-like pattern**: knowledge articles are indexed in th
 - **10-message Sliding Window** — balances conversation continuity vs. token cost
 - **Article Link Parsing** — LLM outputs `[title](article:ID)` format, client-side ChatBubble parses into navigable `Pressable` components
 - **Stateless Server** — no server-side chat storage; client owns persistence via AsyncStorage (50 msg limit)
-- **Thinking Budget** — Gemini 2.5 Flash with 128-token thinking budget for reasoning
+- **Server-side Ark client** — AI calls go through the server-only `invokeLLM()` helper, using `ARK_API_KEY`, `ARK_BASE_URL`, and `ARK_CHAT_MODEL` from deployment environment variables
 
 ## Agent Execution Flow
 
@@ -93,7 +93,7 @@ The AI Advisor uses a **RAG-like pattern**: knowledge articles are indexed in th
 1. User sends query → `useChat` hook extracts last 10 messages as context
 2. tRPC mutation posts to `advisor.chat` (superjson serialized, Zod validated)
 3. Server prepends system prompt (knowledge index + acupoint/oil reference + rules)
-4. Forge API call → Gemini 2.5 Flash processes with thinking budget
+4. Server-side Ark CodingPlan call runs through the OpenAI-compatible helper
 5. Response with `[article](article:ID)` links returned to client
 6. ChatBubble renders clickable article links → user navigates to full knowledge detail
 
@@ -158,6 +158,11 @@ The app is deployed on Vercel with the following setup:
 | `DATABASE_URL` | Supabase PostgreSQL connection string |
 | `JWT_SECRET` | Session signing key |
 | `EXPO_PUBLIC_API_BASE_URL` | Optional (leave empty for same-origin) |
+| `ARK_API_KEY` | Ark CodingPlan API key for server-side AI Advisor calls |
+| `ARK_BASE_URL` | Ark OpenAI-compatible base URL |
+| `ARK_CHAT_MODEL` | Ark chat model used by the server helper |
+| `BUILT_IN_FORGE_API_URL` | Forge service endpoint for non-chat platform services |
+| `BUILT_IN_FORGE_API_KEY` | Forge service API key for non-chat platform services |
 
 ## License
 
